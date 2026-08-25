@@ -17,6 +17,10 @@
     $id =$_POST["id"] ?? $_GET["id"] ?? "";
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+        if(!hash_equals($_SESSION["token"] ?? "",$_POST["token"] ?? "")){
+            exit("Unauthorized access.");
+        }
         
         if($title === ""){
             $title = "No title";
@@ -56,7 +60,7 @@
     <body>
 
         <form method="post" action="editmemo.php">
-
+        <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
         <input type="hidden" name="id" value="<?php echo h($memo["id"]);?>">
         <br>
         <input type="text" name="title" value="<?php echo h($memo["title"]);?>">

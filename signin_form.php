@@ -10,6 +10,11 @@ $password = $_POST["password"] ?? "";
 $err_msg = [];
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+    if(!hash_equals($_SESSION["token"] ?? "",$_POST["token"] ?? "")){
+        exit("Unauthorized access.");
+    }
+
     if ($email === ""){
         $err_msg["email"] = "Required";
     }
@@ -64,6 +69,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <h3>Sign in to SimpleMemo</h3>
         <div style="color:red;"><?php echo h($err_msg["invalid"] ?? "") ;?> </div>
         <form method="post" >
+        <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
         <p>Email</p>  
         <input type="text" name="email" value="<?php echo h($email); ?>"><br>
         <div style="color:red;"><?php echo h($err_msg["email"] ?? "" );?> </div>

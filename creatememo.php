@@ -15,6 +15,10 @@ $body = $_POST["body"] ?? "";
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
+    if(!hash_equals($_SESSION["token"] ?? "",$_POST["token"] ?? "")){
+        exit("Unauthorized access.");
+    }
+
     if($title === ""){
         $title = "No title";
     }
@@ -38,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     <body>
 
     <form method="post">
-
+    <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
     <br>
     <input type="text" name="title">
     <br>

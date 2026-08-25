@@ -17,6 +17,11 @@ $id = $_POST["id"] ?? "";
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
+    if(!hash_equals($_SESSION["token"] ?? "",$_POST["token"] ?? "")){
+        exit("Unauthorized access.");
+    }
+
+
     $stmt = $pdo->prepare("DELETE FROM memos WHERE id = ? AND user_id = ?");
     $stmt->execute([$id,$_SESSION["user_id"]]);
 
@@ -55,6 +60,7 @@ $memos = $stmt->fetchAll();
             <br>
 
             <form method="post">
+                <input type ="hidden" name = "token" value="<?php echo h(csrf_token()); ?>">
                 <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
                 <input type="submit" value="Delete">
             </form>
@@ -67,6 +73,7 @@ $memos = $stmt->fetchAll();
         <br>
         <br>
         <form method="post" action="signout.php">
+            <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
             <input type="submit" value="Sign out">
         </form>
 
