@@ -63,35 +63,39 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <meta charset="UTF-8">
         <title>Sign in</title>
 
+        <link rel="stylesheet" href="style.css">
+
     </head>
     <body>
 
+        <div class="card">
+
         <h3>Sign in to SimpleMemo</h3>
-        <div style="color:red;"><?php echo h($err_msg["invalid"] ?? "") ;?> </div>
+        <div class="err_msg"><?php echo h($err_msg["invalid"] ?? "") ;?> </div>
         <form method="post" >
         <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
         <p>Email</p>  
-        <input type="text" name="email" value="<?php echo h($email); ?>"><br>
-        <div style="color:red;"><?php echo h($err_msg["email"] ?? "" );?> </div>
+        <input type="text" name="email" value="<?php echo h($email); ?>">
+        <div class="err_msg"><?php echo h($err_msg["email"] ?? "" );?> </div>
         
-        <br>
+        
         <p>Password</p>
-        <input type="password" name="password" ><br>
-        <div style="color:red;"><?php echo h($err_msg["password"] ?? "" );?> </div>
+        <input type="password" name="password" >
+        <div class="err_msg"><?php echo h($err_msg["password"] ?? "" );?> </div>
         
-        <br>
+        
         <input type="submit" value="Sign in">
         </form>
 
-        <br>
-        <br>
+        
+        
 
         <p>New to SimpleMemo? <a href="signup.php">Create an account</a></p>
 
-        <?php
+        
 
 
-        ?>
+        </div>
         
     </body>
 </html>

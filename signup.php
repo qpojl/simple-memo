@@ -68,30 +68,36 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <meta charset="UTF-8">
         <title>Sign up</title>
 
+        <link rel="stylesheet" href="style.css">
+
+
     </head>
 
     <body>
+
+     <div class="card">
     
     <h3>Sign up for SimpleMemo</h3>
-    <div style="color:red;"><?php echo h($exist_err_msg["exist"] ??  "") ;?> </div>
+    <div class="err_msg"><?php echo h($exist_err_msg["exist"] ??  "") ;?> </div>
     <form method="post">
     <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
     <p>Email</p>
-    <input type="text" name="email" placeholder="Email" value="<?php echo h($email ?? ""); ?>"><br>
-    <div style="color:red;"><?php echo h($err_msg["n_email"] ?? $err_msg["email"] ?? "" );?> </div>
-    <br>
+    <input type="text" name="email" placeholder="Email" value="<?php echo h($email ?? ""); ?>">
+    <div class="err_msg"><?php echo h($err_msg["n_email"] ?? $err_msg["email"] ?? "" );?> </div>
+    
     <p>Password</p>
-    <input type="password" name="password" placeholder="Password"><br>
-    <p>Password should be at least 8 characters including a number and a lowercase letter.</p>
-    <div style="color: red;"><?php echo h($err_msg["n_password"] ?? $err_msg["password"] ?? "");?> </div>
-    <br>
+    <input type="password" name="password" placeholder="Password">
+    <p class="hint">Password should be at least 8 characters including a number and a lowercase letter.</p>
+    <div class="err_msg"><?php echo h($err_msg["n_password"] ?? $err_msg["password"] ?? "");?> </div>
+    
     <input type="submit" value= "Create an account">
     
 
     </form>
-    <br>
-    <br>
+    
+    
     <p>Already have an account? <a href="signin_form.php">Sign in</a></p>
 
+    </div>
     </body>
 </html>
