@@ -46,6 +46,15 @@ $memos = $stmt->fetchAll();
     <link rel="stylesheet" href="style.css">
 
     </head>
+    <script>
+document.addEventListener("click", function(e) {
+    document.querySelectorAll("details[open]").forEach(function(d) {
+        if (!d.contains(e.target)) {
+            d.removeAttribute("open");
+        }
+    });
+});
+</script>
     <body>
 
         <div class="header">
@@ -66,11 +75,14 @@ $memos = $stmt->fetchAll();
                     <p class="memo-body"><?php echo h($memo["body"]); ?></p>
                     <div class="memo-actions">
                         <a href = "editmemo.php?id=<?php echo h($memo["id"]); ?>">Edit</a>
-                        <form method="post">
-                            <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
-                            <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
-                            <input type="submit" value="Delete" class="btn-delete">
-                        </form>
+                        <details>
+                            <summary>⋮</summary>
+                            <form method="post">
+                                <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
+                                <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
+                                <input type="submit" value="Delete" class="btn-delete">
+                            </form>
+                        </details>
                     </div>
                 </div>
             <?php endforeach; ?>
