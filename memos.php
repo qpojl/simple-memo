@@ -48,37 +48,40 @@ $memos = $stmt->fetchAll();
     </head>
     <body>
 
-
-        <?php foreach($memos as $memo) : ?>
-
-            <h3><?php echo h($memo["title"]); ?></h3>
-        
-            <p><?php echo h($memo["body"]); ?></p> 
-
-            <a href = "editmemo.php?id=<?php echo h($memo["id"]); ?>">Edit</a>
-
-            <br>
-            <br>
-
-            <form method="post">
-                <input type ="hidden" name = "token" value="<?php echo h(csrf_token()); ?>">
-                <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
-                <input type="submit" value="Delete">
-            </form>
-
-        <?php endforeach ; ?>
-
-        <br>
-
-        <a href = "creatememo.php">Create memo</a>
-        <br>
-        <br>
-        <form method="post" action="signout.php">
-            <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
-            <input type="submit" value="Sign out">
-        </form>
-
-
+        <div class="header">
+            <h1>My memos</h1>
+            <div class="header-actions">
+                <a href="creatememo.php" class="btn">Create memo</a>
+                <form method="post" action="signout.php">
+                    <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
+                    <input type="submit" value="Sign out" class="btn-plain">
+                </form>
+            </div>
+        </div>
+            
+     <div class="memo-list">
+            <?php foreach($memos as $memo) : ?>
+                <div class="memo-card">
+                    <h3><?php echo h($memo["title"]); ?></h3>
+                    <p class="memo-body"><?php echo h($memo["body"]); ?></p>
+                    <div class="memo-actions">
+                        <a href = "editmemo.php?id=<?php echo h($memo["id"]); ?>">Edit</a>
+                        <form method="post">
+                            <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
+                            <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
+                            <input type="submit" value="Delete" class="btn-delete">
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </body>
+
+            
+
+       
+       
+
+       
 </html>
 
