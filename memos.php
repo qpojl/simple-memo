@@ -46,16 +46,10 @@ $memos = $stmt->fetchAll();
     <link rel="stylesheet" href="style.css">
 
     </head>
-    <script>
-document.addEventListener("click", function(e) {
-    document.querySelectorAll("details[open]").forEach(function(d) {
-        if (!d.contains(e.target)) {
-            d.removeAttribute("open");
-        }
-    });
-});
-</script>
+    
     <body>
+
+        
 
         <div class="header">
             <h1>My memos</h1>
@@ -67,14 +61,25 @@ document.addEventListener("click", function(e) {
                 </form>
             </div>
         </div>
-            
-     <div class="memo-list">
+
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <input type="text" id="modal-title">
+                <textarea id="modal-body"></textarea>
+                <button id="modal-save">Save</button>
+                <button id="modal-close">Close</button>
+            </div>
+        </div>
+        
+        <div class="memo-list">
             <?php foreach($memos as $memo) : ?>
-                <div class="memo-card">
+                <div class="memo-card" data-id="<?php echo h ($memo["id"]); ?>"
+                    data-title="<?php echo h($memo["title"]); ?>"
+                    data-body="<?php echo h($memo["body"]); ?>">
                     <h3><?php echo h($memo["title"]); ?></h3>
                     <p class="memo-body"><?php echo h($memo["body"]); ?></p>
                     <div class="memo-actions">
-                        <a href = "editmemo.php?id=<?php echo h($memo["id"]); ?>">Edit</a>
+                        
                         <details>
                             <summary>⋮</summary>
                             <form method="post">
@@ -87,6 +92,41 @@ document.addEventListener("click", function(e) {
                 </div>
             <?php endforeach; ?>
         </div>
+
+
+        <script>
+           
+
+            document.querySelectorAll(".memo-card").forEach(function(card) {
+                card.addEventListener("click",function(e){
+                    document.querySelector("#modal-title").value = card.dataset.title;
+                    document.querySelector("#modal-body").value = card.dataset.body;
+                    document.querySelector("#modal").style.display = "flex";
+                    
+                });
+            });
+
+            document.querySelectorAll(".memo-actions details").forEach(function(details) {
+
+                details.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                })
+            });   
+
+            
+
+            document.querySelector("#modal-close").addEventListener("click",function() {
+                document.querySelector("#modal").style.display = "none";
+            })
+
+            document.addEventListener("click", function(e) {
+                document.querySelectorAll("details[open]").forEach(function(d) {
+                    if (!d.contains(e.target)) {
+                        d.removeAttribute("open");
+                    }
+                });
+            });
+        </script>
     </body>
 
             
