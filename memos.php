@@ -68,7 +68,6 @@ $memos = $stmt->fetchAll();
                 <input type="hidden" id="modal-token" value="<?php echo h(csrf_token()); ?>">
                 <input type="text" id="modal-title">
                 <textarea id="modal-body"></textarea>
-                <button id="modal-save">Save</button>
                 <button id="modal-close">Close</button>
             </div>
         </div>
@@ -130,7 +129,7 @@ $memos = $stmt->fetchAll();
                 });
             });
 
-            document.querySelector("#modal-save").addEventListener("click", function(){
+            function autoSave() {
                 const data = new FormData();
                 data.append("id",document.querySelector("#modal-id").value);
                 data.append("title",document.querySelector("#modal-title").value);
@@ -157,13 +156,23 @@ $memos = $stmt->fetchAll();
                         card.dataset.title = newTitle;
                         card.dataset.body = newBody;
 
-                        document.querySelector("#modal").style.display = "none";
+                        
 
                     }
-                })
+                });
                 
-            });
+            }
             
+            let saveTimer = null;
+            document.querySelector("#modal-title").addEventListener("input",function(){
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(autoSave,1000);
+            });
+
+            document.querySelector("#modal-body").addEventListener("input",function(){
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(autoSave, 1000);
+            });
             
             
             
