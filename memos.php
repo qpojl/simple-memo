@@ -64,6 +64,8 @@ $memos = $stmt->fetchAll();
 
         <div class="modal" id="modal">
             <div class="modal-content">
+                <input type="hidden" id="modal-id">
+                <input type="hidden" id="modal-token" value="<?php echo h(csrf_token()); ?>">
                 <input type="text" id="modal-title">
                 <textarea id="modal-body"></textarea>
                 <button id="modal-save">Save</button>
@@ -99,6 +101,7 @@ $memos = $stmt->fetchAll();
 
             document.querySelectorAll(".memo-card").forEach(function(card) {
                 card.addEventListener("click",function(e){
+                    document.querySelector("#modal-id").value = card.dataset.id;
                     document.querySelector("#modal-title").value = card.dataset.title;
                     document.querySelector("#modal-body").value = card.dataset.body;
                     document.querySelector("#modal").style.display = "flex";
@@ -126,14 +129,48 @@ $memos = $stmt->fetchAll();
                     }
                 });
             });
-        </script>
-    </body>
 
+            document.querySelector("#modal-save").addEventListener("click", function(){
+                const data = new FormData();
+                data.append("id",document.querySelector("#modal-id").value);
+                data.append("title",document.querySelector("#modal-title").value);
+                data.append("body",document.querySelector("#modal-body").value);
+                data.append("token",document.querySelector("#modal-token").value);                   
+                fetch("api.php",{
+                    method:"POST",
+                    body: data
+                })
+                .then(function(res){
+                    return res.json();
+                })
+                .then(function(json){
+                    if (json.success) {
+                        const id = document.querySelector("#modal-id").value;
+                        const card = document.querySelector('.memo-card[data-id="' + id + '"]');
+
+                        const newTitle = document.querySelector("#modal-title").value;
+                        const newBody = document.querySelector("#modal-body").value;
+
+                        card.querySelector("h3").textContent = newTitle;
+                        card.querySelector(".memo-body").textContent = newBody;
+
+                        card.dataset.title = newTitle;
+                        card.dataset.body = newBody;
+
+                        document.querySelector("#modal").style.display = "none";
+
+                    }
+                })
+                
+            });
+            
+            
+            
+            
             
 
-       
-       
-
-       
+        </script>
+    </body>
+  
 </html>
 
