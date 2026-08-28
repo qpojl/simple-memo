@@ -174,7 +174,17 @@ $memos = $stmt->fetchAll();
                 saveTimer = setTimeout(autoSave, 1000);
             });
             
-            
+            document.querySelector("#modal").addEventListener("click",function(e){
+                if (e.target === this){
+                    document.querySelector("#modal").style.display = "none";
+                }
+            });
+
+            document.addEventListener("keydown",function(e){
+                if (e.key === "Escape"){
+                    document.querySelector("#modal").style.display = "none";
+                }
+            });
             
             
 
