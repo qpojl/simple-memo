@@ -333,3 +333,15 @@ input[type="submit"].btn-delete:hover {
     margin-top: 12px;
     resize: vertical;
 }
+
+#modal-status {
+    font-size: 13px;
+    color: #4caf59;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#modal-status.show {
+    opacity: 1;
+}
