@@ -322,7 +322,7 @@ input[type="submit"].btn-delete:hover {
     backdrop-filter: blur(20px);
     border : 1px solid rgba(255,255,255,0.8);
     border-radius: 20px;
-    padding: 32px;
+    padding: 26px;
     width: 90%;
     max-width: 560px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.02);
@@ -409,7 +409,7 @@ input[type="text"].editor-title:focus {
     width: 100%;
     border: none;
     background: transparent;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: 600;
     padding: 0;
     margin-bottom: 12px;
@@ -444,7 +444,7 @@ input[type="text"].editor-title:focus {
     border: none;
 }
 
-#modal-title::placeholder,
+#modal-title::placeholder,          
 #modal-body::placeholder {
     color: #bbb;
 }
@@ -474,4 +474,12 @@ button.btn-plain {
     font-size:14px;
     font-family: inherit;
     cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 70px;
+
 }

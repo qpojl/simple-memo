@@ -64,6 +64,10 @@ $memos = $stmt->fetchAll();
 
         <div class="modal" id="modal">
             <div class="modal-content">
+                <div class="modal-header">
+                    <a id="modal-expand" href="">Open in full page</a>
+                </div>
+                
                 <input type="hidden" id="modal-id">
                 <input type="hidden" id="modal-token" value="<?php echo h(csrf_token()); ?>">
                 <input type="text" id="modal-title" placeholder="Title">
@@ -73,7 +77,7 @@ $memos = $stmt->fetchAll();
                     <span id="modal-status"></span>
                     <div class="modal-buttons">
                         <button id="modal-close" class="btn-plain">Close</button>
-                        <a id="modal-expand" href="">Open in full page</a>
+                        
                     </div>
                 </div>
             </div>
