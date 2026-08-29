@@ -62,6 +62,8 @@ $memos = $stmt->fetchAll();
             </div>
         </div>
 
+        <div class="space"></div>
+
         <div class="modal" id="modal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -77,8 +79,6 @@ $memos = $stmt->fetchAll();
                 <div class="modal-footer">
                     <span id="modal-status"></span>
                     <div class="modal-buttons">
-                        
-                        
                     </div>
                 </div>
             </div>
