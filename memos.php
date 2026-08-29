@@ -66,6 +66,7 @@ $memos = $stmt->fetchAll();
             <div class="modal-content">
                 <div class="modal-header">
                     <a id="modal-expand" href="">Open in full page</a>
+                    <button id="modal-close" class="btn-plain">Close</button>
                 </div>
                 
                 <input type="hidden" id="modal-id">
@@ -76,7 +77,7 @@ $memos = $stmt->fetchAll();
                 <div class="modal-footer">
                     <span id="modal-status"></span>
                     <div class="modal-buttons">
-                        <button id="modal-close" class="btn-plain">Close</button>
+                        
                         
                     </div>
                 </div>

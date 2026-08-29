@@ -144,6 +144,7 @@ h3 {
     display: flex;
     gap: 8px;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .memo-actions form {
@@ -479,7 +480,7 @@ button.btn-plain {
 .modal-header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 70px;
+    justify-content: space-between;
+    margin-bottom: 50px;
 
 }
