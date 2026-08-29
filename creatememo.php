@@ -38,25 +38,26 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     <head>
      <meta charset="UTF-8">
      <title>creatememo</title>
-
-     <link rel="stylesheet" href="style.css">
-
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
 
-    <form method="post">
-    <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
-    <br>
-    <input type="text" name="title">
-    <br>
-    <textarea name="body" cols="30" rows="10"></textarea>
-    <br>
-    <input type="submit" value="Save">
+    <body class="editor-page">
+
+        <div class="editor-header">
+            <a href="memos.php">←</a>
+            <span id="status"></span>
+        </div>
+
+    <form method="post" class="editor">
+        <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
+        <input type="text" name="title" class="editor-title" placeholder="Title">
+        <textarea name="body" class="editor-body" placeholder="Start writing..." cols="30" rows="10"></textarea>
+        <button type="submit" class="btn">Save</button>
 
     </form>
-    <br>
+    
 
-    <a href="memos.php">memos</a>
+    
 
 
 

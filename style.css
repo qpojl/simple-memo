@@ -345,3 +345,62 @@ input[type="submit"].btn-delete:hover {
 #modal-status.show {
     opacity: 1;
 }
+
+
+.editor { 
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+input[type="text"].editor-title {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0;
+    margin-bottom: 16px;
+    font-family: inherit;
+    color: #333;
+}
+
+input[type="text"].editor-title:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.editor-body {
+    width:100%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0;
+    min-height: 60vh;
+    resize: none;
+    font-family: inherit;
+    color: #333;
+}
+
+.editor-body:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.editor-title::placeholder,
+editor-body::placeholder {
+    color: #bbb;
+}
+
+.editor-header {
+    max-width:700px;
+    margin:0 auto 40px;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size: 14px;
+}
