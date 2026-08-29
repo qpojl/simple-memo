@@ -70,6 +70,7 @@ $memos = $stmt->fetchAll();
                 <textarea id="modal-body"></textarea>
                 <span id="modal-status"></span>
                 <button id="modal-close">Close</button>
+                <a id="modal-expand" href="">Open in full page</a>
             </div>
         </div>
         
@@ -104,6 +105,7 @@ $memos = $stmt->fetchAll();
                     document.querySelector("#modal-id").value = card.dataset.id;
                     document.querySelector("#modal-title").value = card.dataset.title;
                     document.querySelector("#modal-body").value = card.dataset.body;
+                    document.querySelector("#modal-expand").href = "editmemo.php?id=" + card.dataset.id;
                     document.querySelector("#modal").style.display = "flex";
                     
                 });

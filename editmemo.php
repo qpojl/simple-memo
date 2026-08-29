@@ -40,8 +40,10 @@
     $memo = $stmt->fetch();
 
     if (!$memo){
+
         header("location:memos.php");
         exit;
+
     }
 
 
@@ -53,32 +55,27 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
     <head>
      <meta charset="UTF-8">
-
+     <title>editmemo</title>
      <link rel="stylesheet" href="style.css">
-
     </head>
 
-    <body>
+    <body class="editor-page">
+        <div class="editor-header">
+            <a href="memos.php">←</a>
+            <span id="status"></span>
+        </div>
 
-        <form method="post" action="editmemo.php">
-        <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
-        <input type="hidden" name="id" value="<?php echo h($memo["id"]);?>">
-        <br>
-        <input type="text" name="title" value="<?php echo h($memo["title"]);?>">
-        <br>
-        <textarea name="body" cols="30" rows="10"><?php echo h($memo["body"]);?></textarea>
-        <br>
-        <input type="submit" value="Save">
-
-        <br>
-        <br>
-        
-
+        <form method="post" action="editmemo.php" class="editor">
+            <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
+            <input type="hidden" name="id" value="<?php echo h($memo["id"]);?>">
+            <input type="text" name="title" class="editor-title" placeholder="Title" value="<?php echo h($memo["title"]);?>">
+            <textarea name="body" class="editor-body" placeholder="Write something..." cols="30" rows="10"><?php echo h($memo["body"]);?></textarea>
+            <button type="submit">Save</button>
         </form>
-
-<a href="memos.php">Back</a>
-    
+        
     </body>
+
 </html>
