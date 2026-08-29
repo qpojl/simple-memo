@@ -392,7 +392,7 @@ input[type="text"].editor-title:focus {
 }
 
 .editor-title::placeholder,
-editor-body::placeholder {
+.editor-body::placeholder {
     color: #bbb;
 }
 
@@ -403,4 +403,75 @@ editor-body::placeholder {
     justify-content:space-between;
     align-items:center;
     font-size: 14px;
+}
+
+#modal-title {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0;
+    margin-bottom: 12px;
+    font-family: inherit;
+    color: #333;
+}
+
+#modal-title:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+#modal-body {
+    width:100%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0;
+    min-height: 240px;
+    resize: none;
+    font-family: inherit;
+    color: #333;
+}
+
+#modal-body:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+#modal-title::placeholder,
+#modal-body::placeholder {
+    color: #bbb;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+}
+
+.modal-buttons{
+    display : flex;
+    gap: 12px;
+    align-items: center;
+}
+
+button.btn-plain {
+    background: rgba(255,255,255,0.7);
+    color:#555;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size:14px;
+    font-family: inherit;
+    cursor: pointer;
 }
