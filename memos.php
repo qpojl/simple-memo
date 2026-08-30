@@ -83,6 +83,15 @@ $memos = $stmt->fetchAll();
                 </div>
             </div>
         </div>
+
+        <div class="create-box">
+            <input type="hidden" id="create-token" value="<?php echo h(csrf_token()); ?>">
+            <input type="text" id="create-title" placeholder="Title">
+            <textarea id="create-body" placeholder="Write something..."></textarea>
+            <div class="create-footer">
+                <button id="create-save" class="add-btn">Add</button>
+            </div>
+        </div>
         
         <div class="memo-list">
             <?php foreach($memos as $memo) : ?>

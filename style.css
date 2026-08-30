@@ -490,5 +490,85 @@ button.btn-plain {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin : 70px;
+    margin : 80px;
+}
+
+.create-box{
+    max-width: 600px;
+    margin: 0 auto 42px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 15px 19px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.06);
+    margin-bottom: 110px;
+}
+
+#create-title{
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding:5px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+    margin-bottom: 8px;
+
+
+}
+
+#create-title:focus{
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+#create-body {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding:5px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #333;
+    min-height: 60px;
+    resize: none;
+}
+
+#create-body:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+#create-title::placeholder,
+#create-body::placeholder {
+    color: #aaa;
+}
+
+
+.create-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+    
+}
+
+.add-btn{
+    display: inline-block;
+    background: #2b2b2b;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    border : none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #363636;
+    text-decoration: none;
 }
