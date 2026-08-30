@@ -275,7 +275,27 @@ $memos = $stmt->fetchAll();
                 });
             });
             
-            
+            document.querySelector(".memo-list").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const form = e.target;
+                const card = form.closest(".memo-card");
+
+                const data = new FormData(form);
+
+                fetch("delete_api.php", {
+                    method: "POST",
+                    body: data
+                })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json) {
+                    if (json.success) {
+                        card.remove();
+                    }
+                })
+            })
 
         </script>
     </body>
