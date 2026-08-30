@@ -18,7 +18,6 @@ if(!isset($_SESSION["user_id"])){
 
 $title = $_POST["title"] ?? "";
 $body = $_POST["body"] ?? "";
-$id =$_POST["id"] ??  "";
 
 
 
@@ -31,11 +30,11 @@ if(!hash_equals($_SESSION["token"] ?? "" , $_POST["token"] ?? "")){
 
 
 
-$stmt = $pdo->prepare("UPDATE memos SET title = ?,body = ?  WHERE id = ? AND user_id = ?");
-$stmt->execute([$title,$body,$id,$_SESSION["user_id"]]);
+$stmt = $pdo->prepare("INSERT INTO memos (title,body,user_id) VALUES (?,?,?)");
+$stmt->execute([$title,$body,$_SESSION["user_id"]]);
 
 
 
 
 
-echo json_encode(["success" => true]);
+echo json_encode(["success" => true, "id" => $pdo->lastInsertId()]);

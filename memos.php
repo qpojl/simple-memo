@@ -119,23 +119,23 @@ $memos = $stmt->fetchAll();
         <script>
            
 
-            document.querySelectorAll(".memo-card").forEach(function(card) {
-                card.addEventListener("click",function(e){
-                    document.querySelector("#modal-id").value = card.dataset.id;
-                    document.querySelector("#modal-title").value = card.dataset.title;
-                    document.querySelector("#modal-body").value = card.dataset.body;
-                    document.querySelector("#modal-expand").href = "editmemo.php?id=" + card.dataset.id;
-                    document.querySelector("#modal").style.display = "flex";
+            document.querySelector(".memo-list").addEventListener("click",function(e) {
+                if (document.querySelector("details[open]")) return;
+                if (e.target.closest("details")) return;
+            
+            
+                const card = e.target.closest(".memo-card");
+                if (!card) return;
+
+                document.querySelector("#modal-id").value = card.dataset.id;
+                document.querySelector("#modal-title").value = card.dataset.title;
+                document.querySelector("#modal-body").value = card.dataset.body;
+                document.querySelector("#modal-expand").href = "editmemo.php?id=" + card.dataset.id;
+                document.querySelector("#modal").style.display = "flex";
                     
-                });
             });
+            
 
-            document.querySelectorAll(".memo-actions details").forEach(function(details) {
-
-                details.addEventListener("click", function(e) {
-                    e.stopPropagation();
-                })
-            });   
 
             
 
@@ -220,7 +220,60 @@ $memos = $stmt->fetchAll();
                 }
             });
 
+            document.querySelector("#create-save").addEventListener("click",function(){
+                const data = new FormData();
+                data.append("title",document.querySelector("#create-title").value);
+                data.append("body",document.querySelector("#create-body").value);
+                data.append("token",document.querySelector("#create-token").value);
+
+                fetch("create_api.php", {
+                    method:"POST",
+                    body:data
+                })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json) {
+                    if (json.success) {
+                        
+                       
+                    
+                
             
+
+                        const title = document.querySelector("#create-title").value;
+                        const body = document.querySelector("#create-body").value;
+
+                        const card = document.createElement("div");
+                        card.className = "memo-card";
+                        card.dataset.id = json.id;
+                        card.dataset.title = title;
+                        card.dataset.body = body;
+
+                        card.innerHTML =
+                            '<h3></h3>' +
+                            '<p class="memo-body"></p>' +
+                            '<div class="memo-actions">' +
+                                '<details>' +
+                                    '<summary>⋮</summary>' +
+                                    '<form method="post">' +
+                                        '<input type="hidden" name="token" value="'+document.querySelector("#create-token").value +'">' +
+                                        '<input type="hidden" name="id" value="' + json.id + '">' +
+                                        '<input type="submit" value="Delete" class="btn-delete">' +
+                                    '</form>' +
+                                '</details>' +
+                            '</div>';
+
+                        card.querySelector("h3").textContent = title;
+                        card.querySelector(".memo-body").textContent = body;
+
+                        document.querySelector(".memo-list").prepend(card);
+
+                        document.querySelector("#create-title").value = "";
+                        document.querySelector("#create-body").value = "";
+                    }
+                });
+            });
             
             
 
