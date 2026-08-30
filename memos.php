@@ -54,7 +54,7 @@ $memos = $stmt->fetchAll();
         <div class="header">
             <h1>My memos</h1>
             <div class="header-actions">
-                <a href="creatememo.php" class="btn">Create memo</a>
+                
                 <form method="post" action="signout.php">
                     <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
                     <input type="submit" value="Sign out" class="btn-plain">
