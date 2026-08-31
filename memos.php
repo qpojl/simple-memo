@@ -104,14 +104,20 @@ $memos = $stmt->fetchAll();
                         <p class="memo-body"><?php echo h($memo["body"]); ?></p>
                         <div class="memo-actions">
                             
-                            <details>
-                                <summary>⋮</summary>
-                                <form method="post">
-                                    <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
-                                    <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
-                                    <input type="submit" value="Delete" class="btn-delete">
-                                </form>
-                            </details>
+                            
+                                
+                            <form method="post">
+                                <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
+                                <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
+                                <button type="submit" value="Delete" class="btn-delete" aria-label="Delete">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 6h18"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                </button>   
+                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -130,8 +136,7 @@ $memos = $stmt->fetchAll();
            });
 
             document.querySelector(".memo-list").addEventListener("click",function(e) {
-                if (document.querySelector("details[open]")) return;
-                if (e.target.closest("details")) return;
+               if (e.target.closest(".memo-actions")) return;
             
             
                 const card = e.target.closest(".memo-card");
@@ -153,13 +158,7 @@ $memos = $stmt->fetchAll();
                 document.querySelector("#modal").style.display = "none";
             })
 
-            document.addEventListener("click", function(e) {
-                document.querySelectorAll("details[open]").forEach(function(d) {
-                    if (!d.contains(e.target)) {
-                        d.removeAttribute("open");
-                    }
-                });
-            });
+            
 
             function autoSave() {
                 const data = new FormData();
@@ -262,21 +261,25 @@ $memos = $stmt->fetchAll();
                         card.dataset.title = title;
                         card.dataset.body = body;
 
-                        card.innerHTML =
-                            '<div class="memo-card-inner">' +
-                                '<h3></h3>' +
-                                '<p class="memo-body"></p>' +
-                                '<div class="memo-actions">' +
-                                    '<details>' +
-                                        '<summary>⋮</summary>' +
-                                        '<form method="post">' +
-                                            '<input type="hidden" name="token" value="'+document.querySelector("#create-token").value +'">' +
-                                            '<input type="hidden" name="id" value="' + json.id + '">' +
-                                            '<input type="submit" value="Delete" class="btn-delete">' +
-                                        '</form>' +
-                                    '</details>' +
-                                '</div>' +
-                            '</div>';
+                        card.innerHTML = `
+                             <div class="memo-card-inner">
+        <h3></h3>
+        <p class="memo-body"></p>
+        <div class="memo-actions">
+            <form method="post">
+                <input type="hidden" name="token" value="${document.querySelector("#create-token").value}">
+                <input type="hidden" name="id" value="${json.id}">
+                <button type="submit" class="btn-delete" aria-label="Delete">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 6h18"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+`;
                         card.querySelector("h3").textContent = title;
                         card.querySelector(".memo-body").textContent = body;
 
