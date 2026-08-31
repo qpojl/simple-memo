@@ -115,6 +115,12 @@ $memos = $stmt->fetchAll();
                             <form method="post">
                                 <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
                                 <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
+                                
+                                <button type="button" class="btn-favorite" data-id="<?php echo h($memo["id"]); ?>" aria-label="Bookmark">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $memo["favorite"] ? "currentColor" : "none"; ?>" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                        </svg>
+                                </button> 
                                 <button type="submit" value="Delete" class="btn-delete" aria-label="Delete">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 6h18"/>
@@ -275,6 +281,11 @@ $memos = $stmt->fetchAll();
             <form method="post">
                 <input type="hidden" name="token" value="${document.querySelector("#create-token").value}">
                 <input type="hidden" name="id" value="${json.id}">
+                <button type="button" class="btn-favorite" data-id="${json.id}" aria-label="Bookmark">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                    </svg> 
+                </button>
                 <button type="submit" class="btn-delete" aria-label="Delete">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 6h18"/>
@@ -320,6 +331,31 @@ $memos = $stmt->fetchAll();
                     }
                 })
             })
+
+            document.querySelector(".memo-list").addEventListener("click", function(e) {
+                const btn = e.target.closest(".btn-favorite");
+                if (!btn) return;
+
+                const data = new FormData();
+                data.append("id" , btn.dataset.id);
+                data.append("token", document.querySelector("#create-token").value);
+
+                fetch("favorite_api.php", {
+                    method: "POST",
+                    body: data
+                })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json){
+                    if (json.success) {
+                        const svg = btn.querySelector("svg");
+                        svg.setAttribute("fill", json.favorite == 1 ? "currentColor" : "none");
+
+                    }
+                });
+
+            });    
 
         </script>
     </body>

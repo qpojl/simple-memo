@@ -641,3 +641,25 @@ input[type="submit"].btn-plain:hover {
     color: #333;
     background: rgba(0, 0, 0, 0.05);
 }
+
+.btn-favorite {
+    background: transparent;
+    color: #999;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.btn-favorite:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.btn-favorite.is-active {
+    color: #2b2b2b;
+}
