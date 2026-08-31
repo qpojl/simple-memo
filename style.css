@@ -257,7 +257,7 @@ input[type="submit"].btn-delete:hover {
 
 
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -269,6 +269,15 @@ input[type="submit"].btn-delete:hover {
     z-index:100;
     align-items: center;
     justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
@@ -280,6 +289,12 @@ input[type="submit"].btn-delete:hover {
     width: 90%;
     max-width: 560px;
     box-shadow:0 1px 3px rgba(0, 0, 0, 0.08) , 0 20px 60px rgba(0,0,0,0.02);
+    transform: scale(0.96);
+    transition: transform 0.2s;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
 }
 
 .modal-content textarea {

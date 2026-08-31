@@ -146,7 +146,7 @@ $memos = $stmt->fetchAll();
                 document.querySelector("#modal-title").value = card.dataset.title;
                 document.querySelector("#modal-body").value = card.dataset.body;
                 
-                document.querySelector("#modal").style.display = "flex";
+                document.querySelector("#modal").classList.add("show");
                     
             });
             
@@ -155,7 +155,7 @@ $memos = $stmt->fetchAll();
             
 
             document.querySelector("#modal-close").addEventListener("click",function() {
-                document.querySelector("#modal").style.display = "none";
+                document.querySelector("#modal").classList.remove("show");
             })
 
             
@@ -221,13 +221,13 @@ $memos = $stmt->fetchAll();
             
             document.querySelector("#modal").addEventListener("click",function(e){
                 if (e.target === this){
-                    document.querySelector("#modal").style.display = "none";
+                    document.querySelector("#modal").classList.remove("show");
                 }
             });
 
             document.addEventListener("keydown",function(e){
                 if (e.key === "Escape"){
-                    document.querySelector("#modal").style.display = "none";
+                    document.querySelector("#modal").classList.remove("show");
                 }
             });
 
