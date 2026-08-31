@@ -96,20 +96,23 @@ $memos = $stmt->fetchAll();
         <div class="memo-list">
             <?php foreach($memos as $memo) : ?>
                 <div class="memo-card" data-id="<?php echo h ($memo["id"]); ?>"
+                    
                     data-title="<?php echo h($memo["title"]); ?>"
                     data-body="<?php echo h($memo["body"]); ?>">
-                    <h3><?php echo h($memo["title"]); ?></h3>
-                    <p class="memo-body"><?php echo h($memo["body"]); ?></p>
-                    <div class="memo-actions">
-                        
-                        <details>
-                            <summary>⋮</summary>
-                            <form method="post">
-                                <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
-                                <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
-                                <input type="submit" value="Delete" class="btn-delete">
-                            </form>
-                        </details>
+                    <div class="memo-card-inner">
+                        <h3><?php echo h($memo["title"]); ?></h3>
+                        <p class="memo-body"><?php echo h($memo["body"]); ?></p>
+                        <div class="memo-actions">
+                            
+                            <details>
+                                <summary>⋮</summary>
+                                <form method="post">
+                                    <input type="hidden" name="token" value="<?php echo h(csrf_token()); ?>">
+                                    <input type="hidden" name="id" value="<?php echo h($memo["id"]); ?>">
+                                    <input type="submit" value="Delete" class="btn-delete">
+                                </form>
+                            </details>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -123,7 +126,7 @@ $memos = $stmt->fetchAll();
             itemSelector: ".memo-card" ,
             columnWidth: ".memo-card",
             gutter: 16,
-            fitWidth: true
+            fitWidth: true,
            });
 
             document.querySelector(".memo-list").addEventListener("click",function(e) {
@@ -260,19 +263,20 @@ $memos = $stmt->fetchAll();
                         card.dataset.body = body;
 
                         card.innerHTML =
-                            '<h3></h3>' +
-                            '<p class="memo-body"></p>' +
-                            '<div class="memo-actions">' +
-                                '<details>' +
-                                    '<summary>⋮</summary>' +
-                                    '<form method="post">' +
-                                        '<input type="hidden" name="token" value="'+document.querySelector("#create-token").value +'">' +
-                                        '<input type="hidden" name="id" value="' + json.id + '">' +
-                                        '<input type="submit" value="Delete" class="btn-delete">' +
-                                    '</form>' +
-                                '</details>' +
+                            '<div class="memo-card-inner">' +
+                                '<h3></h3>' +
+                                '<p class="memo-body"></p>' +
+                                '<div class="memo-actions">' +
+                                    '<details>' +
+                                        '<summary>⋮</summary>' +
+                                        '<form method="post">' +
+                                            '<input type="hidden" name="token" value="'+document.querySelector("#create-token").value +'">' +
+                                            '<input type="hidden" name="id" value="' + json.id + '">' +
+                                            '<input type="submit" value="Delete" class="btn-delete">' +
+                                        '</form>' +
+                                    '</details>' +
+                                '</div>' +
                             '</div>';
-
                         card.querySelector("h3").textContent = title;
                         card.querySelector(".memo-body").textContent = body;
 

@@ -110,7 +110,7 @@ h3 {
     
 }
 
-.memo-card {
+.memo-card-inner {
     background: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -151,7 +151,7 @@ h3 {
 
 
 
-.memo-card {
+.memo-card-inner {
     background: rgba(255, 255, 255, 1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -242,11 +242,11 @@ input[type="submit"].btn-delete:hover {
     text-decoration: none;
 }
 
-.memo-card {
-    transition: box-shadow 0.2s, transform 0.2s;
+.memo-card-inner {
+    transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
 }
 
-.memo-card:hover {
+.memo-card:hover .memo-card-inner {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
