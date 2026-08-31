@@ -59,6 +59,14 @@ $memos = $stmt->fetchAll();
 
         <div class="header">
             <h1>My memos</h1>
+
+            <button type="button" id="palette-open" class="search-trigger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <span>Search memos...</span>
+            </button>
             <div class="header-actions">
                 <a href="memos.php" class="filter-link<?php echo $filter === "" ? " is-active" : ""; ?>">ALL</a>
                 <a href="memos.php?filter=favorite" class="filter-link<?php echo $filter === "favorite" ? " is-active" : ""; ?>">Bookmarks</a>
@@ -71,6 +79,12 @@ $memos = $stmt->fetchAll();
         </div>
 
         <div class="space"></div>
+
+        <div class="palette" id="palette">
+            <div class="palette-content">
+                <input type="text" id="palette-input" placeholder="Search memos...">
+            </div>
+        </div>
 
         <div class="modal" id="modal">
             <div class="modal-content">
@@ -248,6 +262,7 @@ $memos = $stmt->fetchAll();
             document.addEventListener("keydown",function(e){
                 if (e.key === "Escape"){
                     document.querySelector("#modal").classList.remove("show");
+                    document.querySelector("#palette").classList.remove("show");
                 }
             });
 
@@ -369,6 +384,19 @@ $memos = $stmt->fetchAll();
                 });
 
             });    
+
+            document.querySelector("#palette-open").addEventListener("click", function() {
+                document.querySelector("#palette").classList.add("show");
+                document.querySelector("#palette-input").focus();
+            });
+
+            document.querySelector("#palette").addEventListener("click", function(e) {
+                if (e.target === this) {
+                    document.querySelector("#palette").classList.remove("show");
+                }
+            });
+            
+
 
         </script>
     </body>
