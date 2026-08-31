@@ -663,3 +663,22 @@ input[type="submit"].btn-plain:hover {
 .btn-favorite.is-active {
     color: #2b2b2b;
 }
+
+.filter-link {
+    color: #888;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.filter-link:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+}
+
+.filter-link.is-active {
+    color: #2b2b2b;
+    font-weight: 600;
+}

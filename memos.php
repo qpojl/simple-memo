@@ -30,7 +30,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
 }
 
-$stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? ORDER BY created DESC, id DESC");
+$filter = $_GET["filter"] ?? "";
+
+if ($filter === "favorite") {
+    $stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? AND favorite = 1 ORDER BY created DESC, id DESC");
+}else{
+    $stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? ORDER BY created DESC, id DESC");
+}
 $stmt ->execute([$_SESSION["user_id"]]);
 $memos = $stmt->fetchAll();
 
@@ -54,7 +60,9 @@ $memos = $stmt->fetchAll();
         <div class="header">
             <h1>My memos</h1>
             <div class="header-actions">
-                
+                <a href="memos.php" class="filter-link<?php echo $filter === "" ? " is-active" : ""; ?>">ALL</a>
+                <a href="memos.php?filter=favorite" class="filter-link<?php echo $filter === "favorite" ? " is-active" : ""; ?>">Bookmarks</a>
+
                 <form method="post" action="signout.php">
                     <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
                     <input type="submit" value="Sign out" class="btn-plain">
@@ -351,6 +359,11 @@ $memos = $stmt->fetchAll();
                     if (json.success) {
                         const svg = btn.querySelector("svg");
                         svg.setAttribute("fill", json.favorite == 1 ? "currentColor" : "none");
+
+                        if (json.favorite == 0 && new URLSearchParams(location.search).get("filter") === "favorite") {
+                            btn.closest(".memo-card").remove();
+                            msnry.layout();
+                        }   
 
                     }
                 });
