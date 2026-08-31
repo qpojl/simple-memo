@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
 }
 
-$stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? ORDER BY created DESC, id DESC");
 $stmt ->execute([$_SESSION["user_id"]]);
 $memos = $stmt->fetchAll();
 
@@ -67,7 +67,7 @@ $memos = $stmt->fetchAll();
         <div class="modal" id="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a id="modal-expand" href="">Open in full page</a>
+                    
                     <button id="modal-close" class="btn-plain">Close</button>
                 </div>
                 
@@ -130,7 +130,7 @@ $memos = $stmt->fetchAll();
                 document.querySelector("#modal-id").value = card.dataset.id;
                 document.querySelector("#modal-title").value = card.dataset.title;
                 document.querySelector("#modal-body").value = card.dataset.body;
-                document.querySelector("#modal-expand").href = "editmemo.php?id=" + card.dataset.id;
+                
                 document.querySelector("#modal").style.display = "flex";
                     
             });
