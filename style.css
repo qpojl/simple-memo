@@ -105,11 +105,9 @@ h3 {
 }
 
 .memo-list {
-    max-width: 1100px;
+    
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    
 }
 
 .memo-card {
@@ -136,7 +134,7 @@ h3 {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    flex-grow: 1;
+    
 
 }
 
@@ -587,3 +585,9 @@ input[type="submit"].btn-plain:hover {
     color: #333;
     
 }
+
+.memo-card {
+    width: 260px;
+    margin-bottom: 16px;
+}
+

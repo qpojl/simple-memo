@@ -115,9 +115,16 @@ $memos = $stmt->fetchAll();
             <?php endforeach; ?>
         </div>
 
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
         <script>
            
+           const msnry = new Masonry(".memo-list", {
+            itemSelector: ".memo-card" ,
+            columnWidth: ".memo-card",
+            gutter: 16,
+            fitWidth: true
+           });
 
             document.querySelector(".memo-list").addEventListener("click",function(e) {
                 if (document.querySelector("details[open]")) return;
@@ -177,6 +184,8 @@ $memos = $stmt->fetchAll();
 
                         card.dataset.title = newTitle;
                         card.dataset.body = newBody;
+
+                        msnry.layout();
 
                         const status = document.querySelector("#modal-status");
                         status.textContent = "✓ Saved";
@@ -268,6 +277,7 @@ $memos = $stmt->fetchAll();
                         card.querySelector(".memo-body").textContent = body;
 
                         document.querySelector(".memo-list").prepend(card);
+                        msnry.prepended(card);
 
                         document.querySelector("#create-title").value = "";
                         document.querySelector("#create-body").value = "";
@@ -293,6 +303,7 @@ $memos = $stmt->fetchAll();
                 .then(function(json) {
                     if (json.success) {
                         card.remove();
+                        msnry.layout();
                     }
                 })
             })
