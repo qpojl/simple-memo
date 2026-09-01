@@ -97,7 +97,7 @@ $memos = $stmt->fetchAll();
 
         <div class="palette" id="palette">
             <div class="palette-content">
-                <input type="text" id="palette-input" placeholder="Search memos...">
+                <input type="text" id="palette-input" placeholder="Search memos..." value="<?php echo h($q); ?>">
             </div>
         </div>
 
@@ -418,6 +418,10 @@ $memos = $stmt->fetchAll();
                     location.href = "memos.php?q=" + encodeURIComponent(this.value);
                 }
             });
+
+            const input = document.querySelector("#palette-input");
+            input.focus();
+            input.setSelectionRange(input.value.length, input.value.length);
 
         </script>
     </body>
