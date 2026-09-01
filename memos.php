@@ -31,14 +31,29 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 }
 
 $filter = $_GET["filter"] ?? "";
+$q = $_GET["q"] ?? "";
+
+$sql = "SELECT * FROM memos WHERE user_id = ?";
+$params = [$_SESSION["user_id"]];
 
 if ($filter === "favorite") {
-    $stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? AND favorite = 1 ORDER BY created DESC, id DESC");
-}else{
-    $stmt = $pdo->prepare("SELECT * FROM memos WHERE user_id = ? ORDER BY created DESC, id DESC");
+    $sql .= " AND favorite = 1";
 }
-$stmt ->execute([$_SESSION["user_id"]]);
+
+if ($q !== "") {
+    $sql .= " AND (title LIKE ? OR body LIKE ?)";
+    $params[]= "%" . $q . "%";
+    $params[]= "%" . $q .  "%";
+}
+
+$sql .= " ORDER BY created DESC, id DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $memos = $stmt->fetchAll();
+
+
+
 
 
 ?>
@@ -398,7 +413,11 @@ $memos = $stmt->fetchAll();
                 }
             });
             
-
+            document.querySelector("#palette-input").addEventListener("keydown" , function(e) {
+                if (e.key === "Enter") {
+                    location.href = "memos.php?q=" + encodeURIComponent(this.value);
+                }
+            });
 
         </script>
     </body>
