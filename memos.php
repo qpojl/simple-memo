@@ -387,7 +387,9 @@ $memos = $stmt->fetchAll();
 
             document.querySelector("#palette-open").addEventListener("click", function() {
                 document.querySelector("#palette").classList.add("show");
-                document.querySelector("#palette-input").focus();
+                setTimeout(function(){
+                    document.querySelector("#palette-input").focus();
+            }, 50);
             });
 
             document.querySelector("#palette").addEventListener("click", function(e) {
