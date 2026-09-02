@@ -514,7 +514,36 @@ $memos = $stmt->fetchAll();
                 });
             }
             
+            
 
+
+
+            document.querySelector("#tag-list").addEventListener("change", function(e) {
+                const cb = e.target;
+                if (cb.type !== "checkbox") return;
+
+                const memoId = document.querySelector("#tag-modal-memo-id").value;
+                const token = document.querySelector("#tag-token").value;
+                const tagId = cb.value;
+
+                if (cb.checked) {
+                    const name = cb.nextElementSibling.textContent;
+
+                    const data = new FormData();
+                    data.append("memo_id", memoId);
+                    data.append("name", name);
+                    data.append("token", token);
+
+                    fetch("tag_add_api.php", { method: "POST", body: data });
+                } else {
+                    const data = new FormData();
+                    data.append("memo_id", memoId);
+                    data.append("tag_id", tagId);
+                    data.append("token", token);
+
+                    fetch("tag_remove_api.php", { method: "POST", body: data });
+                }
+            });
            
         </script>
     </body>
