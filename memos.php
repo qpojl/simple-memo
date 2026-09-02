@@ -128,6 +128,13 @@ $memos = $stmt->fetchAll();
         <div class="modal" id="modal">
             <div class="modal-content">
                 <div class="modal-header">
+
+                <button type="button" id="modal-tag-btn" class="btn-tag" aria-label="Tags">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+                    </svg>
+                </button>
                     
                     <button id="modal-close" class="btn-close" aria-label="Close">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -185,6 +192,16 @@ $memos = $stmt->fetchAll();
                                             <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                                         </svg>
                                 </button> 
+
+
+                                <button type="button" class="btn-tag" data-id="<?php echo h($memo["id"]); ?>" aria-label="Tags">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                                        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+                                    </svg>
+                                </button>
+
+
                                 <button type="submit" value="Delete" class="btn-delete" aria-label="Delete">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 6h18"/>
@@ -352,6 +369,14 @@ $memos = $stmt->fetchAll();
                                                 <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                                             </svg> 
                                         </button>
+
+                                        <button type="button" class="btn-tag" data-id="${json.id}" aria-label="Tags">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                                                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+                                            </svg>
+                                        </button>
+
                                         <button type="submit" class="btn-delete" aria-label="Delete">
                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M3 6h18"/>
@@ -543,6 +568,48 @@ $memos = $stmt->fetchAll();
 
                     fetch("tag_remove_api.php", { method: "POST", body: data });
                 }
+            });
+
+
+
+
+
+            document.querySelector("#tag-create-btn").addEventListener("click", function() {
+                const input = document.querySelector("#tag-new-name");
+                const name = input.value.trim();
+                if (name === "") return;
+
+                const memoId = document.querySelector("#tag-modal-memo-id").value;
+                const token = document.querySelector("#tag-token").value;
+
+                const data = new FormData();
+                data.append("memo_id", memoId);
+                data.append("name", name);
+                data.append("token", token);
+
+                fetch("tag_add_api.php", { method: "POST", body: data })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json) {
+                    if (json.success) {
+                        input.value = "";
+                        loadTags(memoId);
+                    }
+                });
+            });
+
+
+            document.querySelector(".memo-list").addEventListener("click", function(e) {
+                const btn = e.target.closest(".btn-tag");
+                if (!btn) return;
+
+                openTagModal(btn.dataset.id);
+            });
+
+
+            document.querySelector("#modal-tag-btn").addEventListener("click", function() {
+                openTagModal(document.querySelector("#modal-id").value);
             });
            
         </script>

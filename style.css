@@ -868,3 +868,29 @@ input[type="text"]#tag-new-name {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.7);
 }
+
+.btn-tag {
+    background: transparent;
+    color: #999;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.btn-tag:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+#modal .modal-header {
+    gap: 8px;
+}
+
+#tag-modal {
+    z-index: 120;
+}
