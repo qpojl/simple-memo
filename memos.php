@@ -131,6 +131,8 @@ $memos = $stmt->fetchAll();
             <input type="hidden" id="create-token" value="<?php echo h(csrf_token()); ?>">
             <input type="text" id="create-title" placeholder="Title">
             <textarea id="create-body" placeholder="Write something..."></textarea>
+            
+            
             <div class="create-footer">
                 <button id="create-save" class="add-btn">Add</button>
             </div>
@@ -309,34 +311,34 @@ $memos = $stmt->fetchAll();
                         card.className = "memo-card";
                         card.dataset.id = json.id;
                         card.dataset.title = title;
-                        card.dataset.body = body;
+                        card.dataset.body = json.body;
 
                         card.innerHTML = `
                              <div class="memo-card-inner">
-        <h3></h3>
-        <p class="memo-body"></p>
-        <div class="memo-actions">
-            <form method="post">
-                <input type="hidden" name="token" value="${document.querySelector("#create-token").value}">
-                <input type="hidden" name="id" value="${json.id}">
-                <button type="button" class="btn-favorite" data-id="${json.id}" aria-label="Bookmark">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                    </svg> 
-                </button>
-                <button type="submit" class="btn-delete" aria-label="Delete">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 6h18"/>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </div>
-`;
+                                <h3></h3>
+                                <p class="memo-body"></p>
+                                <div class="memo-actions">
+                                    <form method="post">
+                                        <input type="hidden" name="token" value="${document.querySelector("#create-token").value}">
+                                        <input type="hidden" name="id" value="${json.id}">
+                                        <button type="button" class="btn-favorite" data-id="${json.id}" aria-label="Bookmark">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                            </svg> 
+                                        </button>
+                                        <button type="submit" class="btn-delete" aria-label="Delete">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18"/>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        `;
                         card.querySelector("h3").textContent = title;
-                        card.querySelector(".memo-body").textContent = body;
+                        card.querySelector(".memo-body").textContent = json.body;
 
                         document.querySelector(".memo-list").prepend(card);
                         msnry.prepended(card);
@@ -423,6 +425,11 @@ $memos = $stmt->fetchAll();
             input.focus();
             input.setSelectionRange(input.value.length, input.value.length);
 
+            
+
+            
+
+           
         </script>
     </body>
   
