@@ -101,6 +101,30 @@ $memos = $stmt->fetchAll();
             </div>
         </div>
 
+        <div class="modal" id="tag-modal">
+            <div class="modal-content tag-modal-content">
+                <div class="modal-header">
+                    <span class="tag-modal-title">タグを選択</span>
+                    <button id="tag-modal-close" class="btn-close" aria-label="Close">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"/>
+                            <path d="m6 6 12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            
+                <input type="hidden" id="tag-modal-memo-id">
+                <input type="hidden" id="tag-token" value="<?php echo h(csrf_token()); ?>">
+
+                <div class="tag-list" id="tag-list"></div>
+
+                <div class="tag-create">
+                    <input type="text" id="tag-new-name" placeholder="新しいタグ名">
+                    <button type="button" id="tag-create-btn" class="add-btn">作成</button>
+                </div>
+            </div>
+        </div>
+
         <div class="modal" id="modal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -121,11 +145,12 @@ $memos = $stmt->fetchAll();
                 
                 <div class="modal-footer">
                     <span id="modal-status"></span>
-                    <div class="modal-buttons">
-                    </div>
+                    
+                
                 </div>
             </div>
         </div>
+        
 
         <div class="create-box">
             <input type="hidden" id="create-token" value="<?php echo h(csrf_token()); ?>">
@@ -280,6 +305,7 @@ $memos = $stmt->fetchAll();
                 if (e.key === "Escape"){
                     document.querySelector("#modal").classList.remove("show");
                     document.querySelector("#palette").classList.remove("show");
+                    document.querySelector("#tag-modal").classList.remove("show");
                 }
             });
 
@@ -426,7 +452,67 @@ $memos = $stmt->fetchAll();
             input.setSelectionRange(input.value.length, input.value.length);
 
             
+            document.querySelector("#tag-modal-close").addEventListener("click", function() {
+                document.querySelector("#tag-modal").classList.remove("show");
+            });
 
+            document.querySelector("#tag-modal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                document.querySelector("#tag-modal").classList.remove("show");
+                }
+            });
+
+
+
+
+            function openTagModal(memoId) {
+                document.querySelector("#tag-modal-memo-id").value = memoId;
+                document.querySelector("#tag-modal").classList.add("show");
+                loadTags(memoId);
+            }
+
+            function loadTags(memoId) {
+                const token = document.querySelector("#tag-token").value;
+
+                const allData = new FormData();
+                allData.append("token", token);
+
+                const listData = new FormData();
+                listData.append("memo_id", memoId);
+                listData.append("token", token);
+
+                Promise.all([
+                    fetch("tag_all_api.php", { method: "POST", body: allData }).then(function(r) { return r.json(); }),
+                    fetch("tag_list_api.php", { method: "POST", body: listData }).then(function(r) { return r.json(); })
+                ]).then(function(results) {
+                    const allTags = results[0].tags;
+                    const memoTags = results[1].tags;
+
+                    const checkedIds = memoTags.map(function(t) {
+                        return String(t.id);
+                    });
+
+                    const box = document.querySelector("#tag-list");
+                    box.innerHTML = "";
+
+                    allTags.forEach(function(tag) {
+                        const label = document.createElement("label");
+                        label.className = "tag-item";
+
+                        const cb = document.createElement("input");
+                        cb.type = "checkbox";
+                        cb.value = tag.id;
+                        cb.checked = checkedIds.includes(String(tag.id));
+
+                        const span = document.createElement("span");
+                        span.textContent = tag.name;
+
+                        label.appendChild(cb);
+                        label.appendChild(span);
+                        box.appendChild(label);
+                    });
+                });
+            }
             
 
            

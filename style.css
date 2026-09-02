@@ -811,3 +811,60 @@ input[type="text"]#create-tag-input:focus {
     box-shadow: none;
     border: none;
 }
+
+.tag-modal-content {
+    max-width: 400px;
+}
+
+.tag-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#tag-modal .modal-header {
+    margin-bottom: 16px;
+    justify-content: space-between;
+}
+
+.tag-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.tag-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tag-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.tag-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.tag-create {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+input[type="text"]#tag-new-name {
+    flex: 1;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+}
