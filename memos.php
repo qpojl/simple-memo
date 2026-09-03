@@ -140,7 +140,12 @@ $memos = $stmt->fetchAll();
 
                 <div class="tag-create">
                     <input type="text" id="tag-new-name" placeholder="New tag name">
-                    <button type="button" id="tag-create-btn" class="add-btn">Create</button>
+                    <button type="button" id="tag-create-btn" class="add-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5v14"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -188,7 +193,12 @@ $memos = $stmt->fetchAll();
                         <textarea id="create-body" ></textarea>
                         <div class="fake-placeholder" id="create-placeholder">Write something...</div>
                     </div>
-                    <button id="create-save" class="add-btn">Add</button>
+                    <button id="create-save" class="add-btn" aria-label="Save">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5v14"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>

@@ -556,16 +556,18 @@ button.btn-plain {
 
 
 .add-btn{
-    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #2b2b2b;
     color: #fff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 14px;
-    border : none;
-    font-family: inherit;
+    border: none;
     cursor: pointer;
-    transition:  background 0.2s;
+    transition: background 0.2s;
 
 }
 
@@ -573,6 +575,11 @@ button.btn-plain {
     background: #363636;
     text-decoration: none;
 
+}
+
+#tag-create-btn {
+    width: 36px;
+    height: 36px;
 }
 
 .btn-delete {
