@@ -24,9 +24,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     }
 
     if (empty($err_msg)){
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");//「emailが〇〇の人の、全情報を取る」
-        $stmt->execute([$email]);//引数$email(入力されたemailが入る)で実行。データベースを照合。
-        $user = $stmt->fetch();//照合結果を$userに入れる。
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
 
         if ($user && password_verify($password , $user["password"])){
                 
@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         <div class="card">
 
-        <h3>Sign in to SimpleMemo</h3>
+        <h3>Sign in to Kingii</h3>
         <div class="err_msg"><?php echo h($err_msg["invalid"] ?? "") ;?> </div>
         <form method="post" >
         <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         
         
 
-        <p>New to SimpleMemo? <a href="signup.php">Create an account</a></p>
+        <p>New to Kingii? <a href="signup.php">Create an account</a></p>
 
         
 

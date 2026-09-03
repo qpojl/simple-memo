@@ -89,7 +89,7 @@ $memos = $stmt->fetchAll();
         
 
         <div class="header">
-            <h1>My memos</h1>
+            <h1><a href="memos.php" class="brand">Kingii</a></h1>
 
             <button type="button" id="palette-open" class="search-trigger">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -99,8 +99,7 @@ $memos = $stmt->fetchAll();
                 <span>Search memos...</span>
             </button>
             <div class="header-actions">
-                <a href="memos.php" class="filter-link<?php echo $filter === "" ? " is-active" : ""; ?>">ALL</a>
-                <a href="memos.php?filter=favorite" class="filter-link<?php echo $filter === "favorite" ? " is-active" : ""; ?>">Bookmarks</a>
+                
 
                 <form method="post" action="signout.php">
                     <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
@@ -492,6 +491,15 @@ $memos = $stmt->fetchAll();
                 .then(function(json) {
                     const box = document.querySelector("#palette-tags");
                     box.innerHTML = "";
+
+                    const bm = document.createElement("button");
+                    bm.type = "button";
+                    bm.className = "palette-tag palette-bookmark";
+                    bm.textContent = "Bookmarks";
+                    bm.addEventListener("click", function() {
+                        location.href = "memos.php?filter=favorite";
+                    });
+                    box.appendChild(bm);
 
                     json.tags.forEach(function(tag) {
                         const btn = document.createElement("button");
