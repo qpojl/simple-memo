@@ -620,6 +620,7 @@ input[type="submit"].btn-plain {
     color: #888;
     border: none;
     font-size: 14px;
+    transition: color 0.2s;
 }
 
 input[type="submit"].btn-plain:hover {
@@ -1020,6 +1021,7 @@ input[type="text"]#tag-new-name {
     font-weight: 600;
     letter-spacing: -0.04em;
     color: #111;
+    transition: opacity 0.2s;
 }
 
 .brand:hover {
@@ -1096,4 +1098,5 @@ textarea:focus {
     width: 0;
     height: 0;
 }
+
 
