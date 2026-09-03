@@ -771,6 +771,14 @@ $memos = $stmt->fetchAll();
                 e.preventDefault();
                 document.querySelector("#create-save").click();
             });
+
+            document.querySelector("#tag-new-name").addEventListener("keydown", function(e) {
+                if (e.key !== "Enter") return;
+                if (e.isComposing) return;
+
+                e.preventDefault();
+                document.querySelector("#tag-create-btn").click();
+            });
            
         </script>
     </body>

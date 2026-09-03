@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <link rel="stylesheet" href="style.css">
 
     </head>
-    <body>
+    <body class="auth-page">
 
         <div class="card">
 
