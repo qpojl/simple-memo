@@ -1036,7 +1036,7 @@ input[type="submit"].btn-plain:focus {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-textarea :focus {
+textarea:focus {
     outline: none;
     box-shadow: none;
     
@@ -1046,3 +1046,53 @@ textarea :focus {
     min-height: 20px;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.palette ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.palette ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+
+}
+
+
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+#modal-body::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+#modal-body::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
