@@ -545,12 +545,7 @@ button.btn-plain {
 }
 
 
-.create-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-    
-}
+
 
 .add-btn{
     display: inline-block;
@@ -920,4 +915,68 @@ input[type="text"]#tag-new-name {
 .palette-tag:hover {
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
+}
+
+.body-wrap {
+    position: relative;
+}
+
+.body-wrap textarea,
+.body-wrap .fake-placeholder {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.body-wrap .fake-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #aaa;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.body-wrap textarea {
+    min-height: 200px;
+    resize: none;
+}
+
+#create-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+#create-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#create-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+#create-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.body-wrap textarea {
+    min-height: 60px;
+    resize: none;
+    overflow: hidden;
+}
+
+.create-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.body-wrap {
+    flex: 1;
+    position: relative;
 }

@@ -146,12 +146,12 @@ $memos = $stmt->fetchAll();
             <div class="modal-content">
                 <div class="modal-header">
 
-                <button type="button" id="modal-tag-btn" class="btn-tag" aria-label="Tags">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
-                        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
-                    </svg>
-                </button>
+                    <button type="button" id="modal-tag-btn" class="btn-tag" aria-label="Tags">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+                        </svg>
+                    </button>
                     
                     <button id="modal-close" class="btn-close" aria-label="Close">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -179,11 +179,14 @@ $memos = $stmt->fetchAll();
         <div class="create-box">
             <input type="hidden" id="create-token" value="<?php echo h(csrf_token()); ?>">
             <input type="text" id="create-title" placeholder="Title">
-            <textarea id="create-body" placeholder="Write something..."></textarea>
-            
-            
-            <div class="create-footer">
-                <button id="create-save" class="add-btn">Add</button>
+            <div class="create-body">
+                <div class="create-row">
+                    <div class="body-wrap">
+                        <textarea id="create-body" ></textarea>
+                        <div class="fake-placeholder" id="create-placeholder">Write something...</div>
+                    </div>
+                    <button id="create-save" class="add-btn">Add</button>
+                </div>
             </div>
         </div>
         
@@ -654,6 +657,40 @@ $memos = $stmt->fetchAll();
             document.querySelector("#modal-tag-btn").addEventListener("click", function() {
                 openTagModal(document.querySelector("#modal-id").value);
             });
+
+
+            const phMessages = ["Write something...", "Add tags with #"];
+                let phIndex = 0;
+                const ph = document.querySelector("#create-placeholder");
+
+                setInterval(function() {
+                    if (document.querySelector("#create-body").value !== "") return;
+
+                    ph.style.opacity = "0";
+
+                    setTimeout(function() {
+                        phIndex = (phIndex + 1) % phMessages.length;
+                        ph.textContent = phMessages[phIndex]; 
+                        ph.style.opacity = "1";
+                    }, 300);
+                }, 3000);
+
+                document.querySelector("#create-body").addEventListener("input", function() {
+                    ph.style.display = this.value === "" ? "" : "none";
+                });
+
+
+                document.querySelector(".create-box").addEventListener("click", function(e) {
+                    if (e.target.closest("button")) return;
+                    if (e.target.closest("input")) return;
+                    if (e.target.closest("textarea")) return;
+                    document.querySelector("#create-body").focus();
+                });
+
+                document.querySelector("#create-body").addEventListener("input",function(){
+                    document.querySelector("#create-body").style.height = "auto";
+                    document.querySelector("#create-body").style.height = this.scrollHeight + "px";
+                });
            
         </script>
     </body>
