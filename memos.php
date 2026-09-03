@@ -578,8 +578,16 @@ $memos = $stmt->fetchAll();
                         const span = document.createElement("span");
                         span.textContent = tag.name;
 
+                        const del = document.createElement("button");
+                        del.type = "button";
+                        del.className = "tag-delete";
+                        del.textContent = "×";
+                        del.dataset.tagId = tag.id;
+
+
                         label.appendChild(cb);
                         label.appendChild(span);
+                        label.appendChild(del);
                         box.appendChild(label);
                     });
                 });
@@ -691,6 +699,28 @@ $memos = $stmt->fetchAll();
                     document.querySelector("#create-body").style.height = "auto";
                     document.querySelector("#create-body").style.height = this.scrollHeight + "px";
                 });
+
+            document.querySelector("#tag-list").addEventListener("click", function(e) {
+                const del = e.target.closest(".tag-delete");
+                if (!del) return;
+
+                e.preventDefault();
+
+                const data = new FormData();
+                data.append("tag_id", del.dataset.tagId);
+                data.append("token", document.querySelector("#tag-token").value);
+
+                fetch("tag_delete_api.php", { method: "POST", body: data })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json) {
+                    if (json.success) {
+                        loadTags(document.querySelector("#tag-modal-memo-id").value);
+                    }
+                });
+            });
+                
            
         </script>
     </body>

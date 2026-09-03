@@ -980,3 +980,18 @@ input[type="text"]#tag-new-name {
     flex: 1;
     position: relative;
 }
+
+.tag-delete {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.tag-delete:hover {
+    color: #e03131;
+}
