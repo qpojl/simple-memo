@@ -419,6 +419,8 @@ $memos = $stmt->fetchAll();
 
                         document.querySelector("#create-title").value = "";
                         document.querySelector("#create-body").value = "";
+                        ph.style.display = "";
+                        document.querySelector("#create-body").style.height = "auto";
                     }
                 });
             });
@@ -495,6 +497,15 @@ $memos = $stmt->fetchAll();
                 .then(function(json) {
                     const box = document.querySelector("#palette-tags");
                     box.innerHTML = "";
+
+                    const all = document.createElement("button");
+                    all.type = "button";
+                    all.className = "palette-tag";
+                    all.textContent = "All";
+                    all.addEventListener("click", function() {
+                        location.href = "memos.php";
+                    });
+                    box.appendChild(all);
 
                     const bm = document.createElement("button");
                     bm.type = "button";
@@ -732,7 +743,24 @@ $memos = $stmt->fetchAll();
                     }
                 });
             });
+
+            document.querySelector("#modal .modal-content").addEventListener("click", function(e) {
+                if (e.target.closest("button, input, textarea, a")) return;
+                document.querySelector("#modal-body").focus();
+            });
                 
+            const mb = document.querySelector("#modal-body");
+            mb.focus();
+            mb.setSelectionRange(mb.value.length, mb.value.length);
+
+            document.querySelector("#create-body").addEventListener("keydown", function(e) {
+                if (e.key !== "Enter") return;
+                if (e.shiftKey) return;
+                if (e.isComposing) return;
+
+                e.preventDefault();
+                document.querySelector("#create-save").click();
+            });
            
         </script>
     </body>
