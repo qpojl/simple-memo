@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
      <div class="card">
     
-    <h3>Sign up for Kingii</h3>
+    <h3>Sign up for memos</h3>
     <div class="err_msg"><?php echo h($exist_err_msg["exist"] ??  "") ;?> </div>
     <form method="post">
     <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">

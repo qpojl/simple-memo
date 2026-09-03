@@ -9,6 +9,9 @@ body{
 
 }
 
+body {
+    font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
+}
 
 input[type="text"],
 input[type="password"],
@@ -21,12 +24,13 @@ border-radius: 6px;
 font-size: 15px;
 font-family: inherit;
 box-sizing: border-box;
+
 }
 
 input:focus,
 textarea:focus{
     outline:none;
-    border-color:#4a7cff;
+    
 }
 
 input[type="submit"]{
@@ -97,6 +101,7 @@ h3 {
     background: rgba(252, 252, 252, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    
 }
 
 .header::after {
@@ -167,6 +172,9 @@ h3 {
 }
 
 .memo-actions form {
+    display: flex;
+    gap: 4px;
+    align-items: center;
     margin: 0;
 }
 
@@ -446,7 +454,7 @@ input[type="text"].editor-title:focus {
     align-items: center;
     margin: 16px;
     padding-top: 16px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: none;
 
 }
 
@@ -490,7 +498,7 @@ button.btn-plain {
     border-radius: 20px;
     padding: 15px 19px;
     box-shadow:0 1px 3px rgba(0, 0, 0, 0.08) ,0 8px 32px rgba(0,0,0,0.06);
-    margin-bottom: 80px;
+    margin-bottom: 120px;
     transition: box-shadow 0.2s, transform 0.2s;
     
 }
@@ -618,6 +626,14 @@ input[type="submit"].btn-plain:hover {
     color: #333;
 }
 
+input[type="submit"].btn-plain:focus {
+    outline: none;
+}
+
+input[type="submit"].btn-plain:focus-visible {
+    outline: 2px solid rgba(0, 0, 0, 0.3);
+    outline-offset: 2px;
+}
 
 .btn-close {
     background: transparent;
@@ -685,12 +701,15 @@ input[type="submit"].btn-plain:hover {
     background: rgba(0,0,0,0.04);
     border-radius: 10px;
     padding: 10px 16px;
-    min-width: 280px;
+    min-width: 500px;
     color: #999;
     font-size: 14px;
     cursor: pointer;
     transition: background 0.2s;
     border: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .search-trigger:hover {
@@ -997,14 +1016,33 @@ input[type="text"]#tag-new-name {
 }
 
 .brand {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2b2b2b;
-    text-decoration: none;
-    letter-spacing: -0.01em;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: #111;
 }
 
 .brand:hover {
     text-decoration: none;
     opacity: 0.7;
 }
+
+input[type="submit"].btn-plain:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    border: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea :focus {
+    outline: none;
+    box-shadow: none;
+    
+}
+
+#modal-footer {
+    min-height: 20px;
+}
+

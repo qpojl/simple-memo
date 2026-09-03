@@ -82,6 +82,10 @@ $memos = $stmt->fetchAll();
      <title>memos</title>
     <link rel="stylesheet" href="style.css">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
     </head>
     
     <body>
@@ -89,7 +93,7 @@ $memos = $stmt->fetchAll();
         
 
         <div class="header">
-            <h1><a href="memos.php" class="brand">Kingii</a></h1>
+            <h1><a href="memos.php" class="brand">memos</a></h1>
 
             <button type="button" id="palette-open" class="search-trigger">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -120,7 +124,7 @@ $memos = $stmt->fetchAll();
         <div class="modal" id="tag-modal">
             <div class="modal-content tag-modal-content">
                 <div class="modal-header">
-                    <span class="tag-modal-title">タグを選択</span>
+                    <span class="tag-modal-title">Tags</span>
                     <button id="tag-modal-close" class="btn-close" aria-label="Close">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"/>
@@ -135,8 +139,8 @@ $memos = $stmt->fetchAll();
                 <div class="tag-list" id="tag-list"></div>
 
                 <div class="tag-create">
-                    <input type="text" id="tag-new-name" placeholder="新しいタグ名">
-                    <button type="button" id="tag-create-btn" class="add-btn">作成</button>
+                    <input type="text" id="tag-new-name" placeholder="New tag name">
+                    <button type="button" id="tag-create-btn" class="add-btn">Create</button>
                 </div>
             </div>
         </div>
@@ -302,7 +306,7 @@ $memos = $stmt->fetchAll();
                         msnry.layout();
 
                         const status = document.querySelector("#modal-status");
-                        status.textContent = "✓ Saved";
+                        status.textContent = "Saved";
                         status.classList.add("show");
 
                         setTimeout(function(){

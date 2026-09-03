@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         <div class="card">
 
-        <h3>Sign in to Kingii</h3>
+        <h3>Sign in to memos</h3>
         <div class="err_msg"><?php echo h($err_msg["invalid"] ?? "") ;?> </div>
         <form method="post" >
         <input type="hidden" name="token" value="<?php echo h(csrf_token());?>">
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         
         
 
-        <p>New to Kingii? <a href="signup.php">Create an account</a></p>
+        <p>New to memos? <a href="signup.php">Create an account</a></p>
 
         
 
