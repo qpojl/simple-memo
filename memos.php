@@ -32,6 +32,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
 $filter = $_GET["filter"] ?? "";
 $q = $_GET["q"] ?? "";
+$tagId = $_GET["tag"] ?? "";
 
 $sql = "SELECT * FROM memos WHERE user_id = ?";
 $params = [$_SESSION["user_id"]];
@@ -44,13 +45,28 @@ if ($q !== "") {
     $sql .= " AND (title LIKE ? OR body LIKE ?)";
     $params[]= "%" . $q . "%";
     $params[]= "%" . $q .  "%";
+
 }
 
+
+
+if ($tagId !== "") {
+    $sql .= " AND id IN (SELECT memo_id FROM memo_tags WHERE tag_id = ?)";
+    $params[] = $tagId;
+}
+
+
 $sql .= " ORDER BY created DESC, id DESC";
+
+
+
+
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $memos = $stmt->fetchAll();
+
+
 
 
 
@@ -98,6 +114,7 @@ $memos = $stmt->fetchAll();
         <div class="palette" id="palette">
             <div class="palette-content">
                 <input type="text" id="palette-input" placeholder="Search memos..." value="<?php echo h($q); ?>">
+                <div class="palette-tags" id="palette-tags"></div>
             </div>
         </div>
 
@@ -455,10 +472,36 @@ $memos = $stmt->fetchAll();
 
             document.querySelector("#palette-open").addEventListener("click", function() {
                 document.querySelector("#palette").classList.add("show");
+                loadPaletteTags();
                 setTimeout(function(){
                     document.querySelector("#palette-input").focus();
-            }, 50);
+                }, 50);
             });
+
+            function loadPaletteTags() {
+                const data = new FormData();
+                data.append("token", document.querySelector("#tag-token").value);
+
+                fetch("tag_all_api.php", { method: "POST", body: data })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(json) {
+                    const box = document.querySelector("#palette-tags");
+                    box.innerHTML = "";
+
+                    json.tags.forEach(function(tag) {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "palette-tag";
+                        btn.textContent = "#" + tag.name;
+                        btn.addEventListener("click", function() {
+                            location.href = "memos.php?tag=" + tag.id;
+                        });
+                        box.appendChild(btn);
+                    });
+                });
+            }
 
             document.querySelector("#palette").addEventListener("click", function(e) {
                 if (e.target === this) {

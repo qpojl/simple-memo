@@ -894,3 +894,30 @@ input[type="text"]#tag-new-name {
 #tag-modal {
     z-index: 120;
 }
+
+
+.palette-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.palette-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    border: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+
+.palette-tag:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
